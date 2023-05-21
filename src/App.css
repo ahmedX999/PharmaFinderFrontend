@@ -1,0 +1,73 @@
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* styles.css */
+
+/* Header styles */
+.navbar {
+  background-color: #ebf5ff;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px;
+  font-weight: 500;
+  color: #212529;
+ 
+}
+
+/* Footer styles */
+.footer {
+  background-color: #53a2f1;
+  color: #FFFFFF;
+  padding: 40px 0;
+}
+
+.footer h5 {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer p {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer ul li a {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer.fixed-bottom {
+  background-color: #343A40;
+  color: #FFFFFF;
+  height: 60px;
+}
+
