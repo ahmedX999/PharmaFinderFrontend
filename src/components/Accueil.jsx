@@ -27,7 +27,7 @@ const Accueil = () => {
 
   const fetchPharmaciesCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/pharmacies/all');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/pharmacies/all');
       setPharmaciesCount(response.data.length);
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ const Accueil = () => {
 
   const fetchVillesCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/cities');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/cities');
       setVillesCount(response.data.length);
     } catch (error) {
       console.log(error);
@@ -45,7 +45,7 @@ const Accueil = () => {
 
   const fetchZonesCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/zones');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/zones');
       setZonesCount(response.data.length);
     } catch (error) {
       console.log(error);
@@ -54,7 +54,7 @@ const Accueil = () => {
   
   const fetchPharmaciesGardeCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/pharmacies/garde/all');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/pharmacies/garde/all');
       setPharmaciesGardeCount(response.data.length);
     } catch (error) {
       console.log(error);
