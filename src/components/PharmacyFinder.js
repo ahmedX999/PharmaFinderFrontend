@@ -41,7 +41,7 @@ const PharmacyFinder = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/cities')
+    axios.get('https://lacking-mask-production.up.railway.app/api/cities')
       .then(response => {
         setCities(response.data);
       })
@@ -52,7 +52,7 @@ const PharmacyFinder = () => {
 
   useEffect(() => {
     if (selectedCity) {
-      axios.get(`http://localhost:8080/api/zones/city/${selectedCity}`)
+      axios.get(`https://lacking-mask-production.up.railway.app/api/zones/city/${selectedCity}`)
         .then(response => {
           setZones(response.data);
         })
@@ -64,7 +64,7 @@ const PharmacyFinder = () => {
 
   useEffect(() => {
     if (selectedCity && selectedZone && selectedGarde) {
-      axios.get(`http://localhost:8080/api/pharmacies/zone/${selectedZone}/garde/${selectedGarde}`)
+      axios.get(`https://lacking-mask-production.up.railway.app/api/pharmacies/zone/${selectedZone}/garde/${selectedGarde}`)
         .then(response => {
           setPharmacies(response.data);
           setMapCenter({ lat: response.data[0].altitude, lng: response.data[0].longitude });

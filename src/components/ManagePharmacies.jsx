@@ -31,7 +31,7 @@ const AddPharmacy = () => {
 
     try {
       // Perform API call to save the new pharmacy
-      await axios.post('http://localhost:8080/api/pharmacies/save', newPharmacy);
+      await axios.post('https://lacking-mask-production.up.railway.app/api/pharmacies/save', newPharmacy);
 
       // Clear form inputs
       setName('');

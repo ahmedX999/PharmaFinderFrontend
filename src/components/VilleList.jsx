@@ -26,7 +26,7 @@ const VilleList = () => {
 
   const handleAddVille = async () => {
     try {
-      await axios.post('http://localhost:8080/api/cities/save', newVille);
+      await axios.post('https://lacking-mask-production.up.railway.app/api/cities/save', newVille);
       setNewVille({ nom: '' });
       setShowAddModal(false);
       fetchVilles();
@@ -37,7 +37,7 @@ const VilleList = () => {
 
   const handleDeleteVille = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/cities/deleteVille/id=${id}`);
+      await axios.delete(`https://lacking-mask-production.up.railway.app/api/cities/deleteVille/id=${id}`);
       fetchVilles();
     } catch (error) {
       console.log(error);
@@ -46,7 +46,7 @@ const VilleList = () => {
 
   const handleEditVille = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/cities/${editVille.id}`, editVille);
+      await axios.put(`https://lacking-mask-production.up.railway.app/api/cities/${editVille.id}`, editVille);
       setShowEditModal(false);
       fetchVilles();
     } catch (error) {
