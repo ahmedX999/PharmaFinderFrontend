@@ -17,7 +17,7 @@ const VilleList = () => {
 
   const fetchVilles = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/cities');
+      const response = await axios.get('http://localhost:8080/api/pharmacies/all');
       setVilles(response.data);
     } catch (error) {
       console.log(error);
@@ -26,8 +26,10 @@ const VilleList = () => {
 
   const handleAddVille = async () => {
     try {
-      await axios.post('http://localhost:8080/api/cities/save', newVille);
-      setNewVille({ nom: '' });
+      await axios.post('http://localhost:8080/api/pharmacies/save', newVille);
+      setNewVille({ name: '',
+      address: '',
+      city: '', });
       setShowAddModal(false);
       fetchVilles();
     } catch (error) {
@@ -37,7 +39,7 @@ const VilleList = () => {
 
   const handleDeleteVille = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/cities/deleteVille/id=${id}`);
+      await axios.delete(`http://localhost:8080/api/pharmacies/deletePharmacy/id=${id}`);
       fetchVilles();
     } catch (error) {
       console.log(error);
@@ -46,7 +48,7 @@ const VilleList = () => {
 
   const handleEditVille = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/cities/${editVille.id}`, editVille);
+      await axios.put(`http://localhost:8080/api/pharmacies/${editVille.id}`, editVille);
       setShowEditModal(false);
       fetchVilles();
     } catch (error) {
@@ -62,17 +64,17 @@ const VilleList = () => {
   return (
     <div style={{ width: "100%" }}>
     <div className="container">
-      <h1 className="mt-4 mb-4 text-center">Manage Cities</h1>
+      <h1 className="mt-4 mb-4 text-center">Liste des Pharmacies</h1>
       <button className="btn btn-primary mb-3" onClick={() => setShowAddModal(true)}>Ajouter</button>
 
       {/* Modal d'ajout de ville */}
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add city</Modal.Title>
+          <Modal.Title>Ajouter une pharmacy</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mb-3">
-            <label className="form-label">Name</label>
+            <label className="form-label">Nom</label>
             <input
               type="text"
               className="form-control"
@@ -90,11 +92,11 @@ const VilleList = () => {
       {/* Modal de modification de ville */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Modify city</Modal.Title>
+          <Modal.Title>Modifier une Pharmacy</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mb-3">
-            <label className="form-label">name</label>
+            <label className="form-label">Nom</label>
             <input
               type="text"
               className="form-control"
@@ -104,8 +106,8 @@ const VilleList = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEditModal(false)}>Close</Button>
-          <Button variant="primary" onClick={handleEditVille}>Modify</Button>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>Fermer</Button>
+          <Button variant="primary" onClick={handleEditVille}>Modifier</Button>
         </Modal.Footer>
       </Modal>
 
@@ -114,7 +116,7 @@ const VilleList = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -124,8 +126,8 @@ const VilleList = () => {
               <td>{ville.id}</td>
               <td>{ville.name}</td>
               <td>
-                <button className="btn btn-primary me-2" onClick={() => openEditModal(ville)}>Modify</button>
-                <button className="btn btn-danger" onClick={() => handleDeleteVille(ville.id)}>Delete</button>
+                <button className="btn btn-primary me-2" onClick={() => openEditModal(ville)}>Modifier</button>
+                <button className="btn btn-danger" onClick={() => handleDeleteVille(ville.id)}>Supprimer</button>
               </td>
             </tr>
           ))}
@@ -133,7 +135,7 @@ const VilleList = () => {
       </Table>
     </div>
     <div style={{ width: "100%" }}>
-   
+    <FooterComponent />
   </div>
 
 </div>

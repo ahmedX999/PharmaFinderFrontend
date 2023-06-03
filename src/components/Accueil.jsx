@@ -70,7 +70,7 @@ const Accueil = () => {
       <br />
       <div className="row">
         <div className="col-sm-4">
-          <Card className="mb-3 bg-success shadow"> 
+          <Card className="mb-3 bg-primary shadow"> 
             <Card.Body>
               <div className="d-flex align-items-center">
                 <Icon icon={medkit} className="me-3" size={24} />
@@ -83,7 +83,7 @@ const Accueil = () => {
           </Card>
         </div>
          <div className="col-sm-4">
-          <Card className="mb-3 bg-success shadow"> 
+          <Card className="mb-3 bg-primary shadow"> 
             <Card.Body>
               <div className="d-flex align-items-center">
                 <Icon icon={medkit} className="me-3" size={24} />
@@ -96,7 +96,7 @@ const Accueil = () => {
           </Card>
         </div>
         <div className="col-sm-4">
-          <Card className="mb-3 bg-success shadow"> 
+          <Card className="mb-3 bg-primary shadow"> 
             <Card.Body>
               <div className="d-flex align-items-center">
                 <Icon icon={building} className="me-3" size={24} />
@@ -109,7 +109,7 @@ const Accueil = () => {
           </Card>
         </div>
         <div className="col-sm-4">
-          <Card className="mb-3 bg-success shadow"> 
+          <Card className="mb-3 bg-primary shadow"> 
             <Card.Body>
               <div className="d-flex align-items-center">
                 <Icon icon={mapMarker} className="me-3" size={24} />

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import AddPharmacyForm from './AddPharmacyForm';
+
+
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -19,6 +22,8 @@ const Contact = () => {
 
   return (
     <div className="container">
+<AddPharmacyForm/>
+
       <h1 className="mt-4 mb-4 text-center">Contactez-nous</h1>
       {submitted ? (
         <div className="alert alert-success" role="alert">
@@ -62,7 +67,10 @@ const Contact = () => {
           <button type="submit" className="btn btn-primary">Envoyer</button>
         </form>
       )}
+
+    
     </div>
+
   );
 };
 

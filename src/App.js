@@ -1,122 +1,77 @@
-import logo from './images/logo.jpg';
+import logo from './images/logo.png';
 import './App.css';
-import React from 'react'
+import React from 'react';
 import HeaderComponent from './components/HeaderComponent';
-// import FooterComponent from './components/FooterComponent';
+import FooterComponent from './components/FooterComponent';
 
-
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Accueil from './components/Accueil';
 import Apropos from './components/Apropos';
 import Contact from './components/Contact';
 import VilleList from './components/VilleList';
-// import ZoneList from './components/ZoneList';
+import ZoneList from './components/ZoneList';
 import Login from './components/LoginForm';
 import PharmacyFinder from './components/PharmacyFinder';
-
 import Signup from './components/Signup';
+
+import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
+import AddPharmacy from './components/ManagePharmacies';
 
 function App() {
   return (
+    <Router>
+      <AppBar position="static">
+        <Toolbar>
+        <img src={logo} alt="logo" className="navbar-brand" style={{ width: '250px' }} />
 
-    <BrowserRouter>
-    <div> 
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div className="container-fluid">
-    <img src={logo} alt="logo" className="navbar-brand" />
 
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            .
+          </Typography>
 
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/accueil" className="nav-link">
+          <Button color="inherit" component={Link} to="/accueil">
             Accueil
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/apropos" className="nav-link">
-            A propos
-          </Link>
-        </li>
-        
-      </ul>
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link to="/villes" className="nav-link">
+          </Button>
+         
+          <Button color="inherit" component={Link} to="/villes">
             Villes
-          </Link>
-        </li>
-      </ul>
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link to="/zones" className="nav-link">
+          </Button>
+          <Button color="inherit" component={Link} to="/zones">
             Zones
-          </Link>
-        </li>
-      </ul>
-
-      <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
-          <Link to="/pharmacies" className="nav-link">
+          </Button>
+          <Button color="inherit" component={Link} to="/pharmacies">
             Pharmacies
-          </Link>
-        </li>
+          </Button>
+          <Button color="inherit" component={Link} to="/manage">
+            Manage your Pharmacies
+          </Button>
+         
+          <Button color="inherit" component={Link} to="/login">
+            Login
+          </Button>
+          <Button color="inherit" component={Link} to="/signup">
+            Sign up
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
+        <Routes>
+          <Route path="/accueil" element={<Accueil />} />
+         
+          
+          <Route path="/villes" element={<VilleList />} />
+          <Route path="/zones" element={<ZoneList />} />
+          <Route path="/pharmacies" element={<PharmacyFinder />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/manage" element={<AddPharmacy/> } />
+        </Routes>
+      </Container>
       
 
-      <li className="nav-item">
-          <Link to="/contact" className="nav-link">
-            Contact
-          </Link>
-        </li>
-        </ul>
-        <ul className="navbar-nav ml-auto ">
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/signup" className="nav-link">
-            Sign up
-          </Link>
-        </li>
-        </ul>
-
-    </div>
-  </div>
-</nav>
-
-
-    <Routes> 
-    <Route path="/accueil" element={<Accueil />}></Route>
-    <Route path="/apropos" element={<Apropos />}></Route>
-    <Route path="/contact" element={<Contact />}></Route>
-    <Route path="/villes" element={<VilleList />}></Route>
-    {/* <Route path="/zones" element={<ZoneList />}></Route> */}
-    <Route path="/pharmacies" element={<PharmacyFinder />}></Route>
-     <Route path="/login" element={<Login />}></Route> 
-     <Route path="/signup" element={<Signup />}></Route> 
-    </Routes>
-    
-    </div>
-    <div>
-    {/* <FooterComponent/> */}
-    </div>
-</BrowserRouter>
-
-
-
+      {/* <FooterComponent/> */}
+    </Router>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Icon } from "leaflet/src/layer/marker";
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -25,7 +25,7 @@ const PharmacyFinder = () => {
   const [mapCenter, setMapCenter] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentPosition, setCurrentPosition] = useState(null);
-
+ 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -91,7 +91,7 @@ const PharmacyFinder = () => {
   };
 
   const customIcon = new Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/4320/4320337.png",
+    iconUrl: "https://cdn-icons-png.flaticon.com/512/2055/2055176.png",
     iconSize: [38, 38],
   });
 
@@ -109,13 +109,13 @@ const PharmacyFinder = () => {
   return (
     <div style={{ width: "100%" }}>
     <div>
-      <h1 className="mt-4 mb-4 text-center">Search your Pharmacie in PharmaFinder</h1>
+      <h1 className="mt-4 mb-4 text-center">Search your Pharmacie </h1>
       <hr />
 
       <div>
         <label htmlFor="city-select">Ville:</label>
         <select id="city-select" value={selectedCity} onChange={handleCityChange}>
-          <option value="">-- Sélectionner une ville --</option>
+          <option value="">-- Choose a city --</option>
           {cities.map(city => (
             <option key={city.id} value={city.id}>{city.name}</option>
           ))}
@@ -129,7 +129,7 @@ const PharmacyFinder = () => {
           <div>
             <label htmlFor="zone-select">Zone:</label>
             <select id="zone-select" value={selectedZone} onChange={handleZoneChange}>
-              <option value="">-- Sélectionner une zone --</option>
+              <option value="">-- select your zone --</option>
               {zones.map(zone => (
                 <option key={zone.id} value={zone.id}>{zone.name}</option>
               ))}
@@ -141,11 +141,11 @@ const PharmacyFinder = () => {
               <br />
 
               <div>
-                <label htmlFor="garde-select">Type de garde:</label>
+                <label htmlFor="garde-select">Type of guard:</label>
                 <select id="garde-select" value={selectedGarde} onChange={handleGardeChange}>
-                  <option value="">-- Sélectionner le type de garde --</option>
-                  <option value="1">Jour</option>
-                  <option value="2">Nuit</option>
+                  <option value="">-- Select the type of custody --</option>
+                  <option value="1">Day</option>
+                  <option value="2">Night</option>
                 </select>
               </div>
 
@@ -153,7 +153,7 @@ const PharmacyFinder = () => {
                 <div>
                   <br />
 
-                  <h2>Liste des pharmacies de garde</h2>
+                  <h2>List of duty pharmacies</h2>
                   {pharmacies.length > 0 ? (
                     <div>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: "20px" }}>
@@ -180,12 +180,18 @@ const PharmacyFinder = () => {
                             </CardContent>
                             <CardActions>
                               <Button onClick={() => setModalIsOpen(true)} size="small" style={{ backgroundColor: "blue", color: "white" }}>
-                                Consulter
+                                Consult
                               </Button>
+                              
+                              <a target="_blank" href={`https://www.google.com/maps?q=${pharmacy.altitude},${pharmacy.longitude}`}>
+      <Button size="small" style={{ backgroundColor: "red", color: "white" }} >
+        Maps
+      </Button>
+    </a>
                               <ReactModal isOpen={modalIsOpen}>
-                                <h2>Détails de {pharmacy.name}</h2>
+                                <h2>Details of {pharmacy.name}</h2>
                                 <p>Insert your content here</p>
-                                <button onClick={() => setModalIsOpen(false)}>Fermer</button>
+                                <button onClick={() => setModalIsOpen(false)}>close</button>
                               </ReactModal>
                             </CardActions>
                           </Card>
@@ -193,7 +199,7 @@ const PharmacyFinder = () => {
                       </Box>
                     </div>
                   ) : (
-                    <p>Aucune pharmacie trouvée.</p>
+                    <p>No pharmacy found .</p>
                   )}
 
                   <br />
@@ -215,10 +221,7 @@ const PharmacyFinder = () => {
                             <Marker icon={customIcon2} position={[currentPosition.lat, currentPosition.lng]}>
                               <Popup>My Current position</Popup>
                             </Marker>
-                            <Polyline key={pharmacy.id} positions={[
-                              [currentPosition.lat, currentPosition.lng],
-                              [pharmacy.altitude, pharmacy.longitude],
-                            ]} />
+                            
                           </>
                         ))}
                       </MapContainer>
