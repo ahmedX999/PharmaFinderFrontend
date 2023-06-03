@@ -45,7 +45,7 @@ const Accueil = () => {
 
   const fetchZonesCount = async () => {
     try {
-      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/zones');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/zones/all');
       setZonesCount(response.data.length);
     } catch (error) {
       console.log(error);
