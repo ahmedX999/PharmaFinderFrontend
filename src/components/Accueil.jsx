@@ -126,7 +126,7 @@ const Accueil = () => {
      
     </div>
     <div style={{ width: "100%" }}>
-        <FooterComponent />
+    
       </div>
 
     </div>
