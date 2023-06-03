@@ -27,7 +27,7 @@ const Accueil = () => {
 
   const fetchPharmaciesCount = async () => {
     try {
-      const response = await axios.get('https://lacking-mask-production.up.railway.app/pharmacies/all');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/pharmacies/all');
       setPharmaciesCount(response.data.length);
     } catch (error) {
       console.log(error);
