@@ -29,7 +29,7 @@ function App() {
             .
           </Typography>
 
-          <Button color="inherit" component={Link} to="/accueil">
+          <Button color="inherit" component={Link} to="/">
             Accueil
           </Button>
          
@@ -57,7 +57,7 @@ function App() {
 
       <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
         <Routes>
-          <Route path="/accueil" element={<Accueil />} />
+          <Route path="/" element={<Accueil />} />
          
           
           <Route path="/villes" element={<VilleList />} />
