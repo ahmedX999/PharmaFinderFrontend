@@ -17,7 +17,7 @@ const VilleList = () => {
 
   const fetchVilles = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/cities');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/cities');
       setVilles(response.data);
     } catch (error) {
       console.log(error);
