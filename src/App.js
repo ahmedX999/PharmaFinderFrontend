@@ -16,7 +16,7 @@ import Signup from './components/Signup';
 
 import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 import AddPharmacy from './components/ManagePharmacies';
-import PharmacyList from './components/PharmacieList';
+
 
 function App() {
   return (
@@ -34,10 +34,7 @@ function App() {
             Accueil
           </Button>
 
-          <Button color="inherit" component={Link} to="/PharmaciesList">
-            PharmaciesList
-          </Button>
-         
+     
           <Button color="inherit" component={Link} to="/villes">
             Villes
           </Button>
@@ -69,7 +66,7 @@ function App() {
           <Route path="/zones" element={<ZoneList />} />
           <Route path="/pharmacies" element={<PharmacyFinder />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/PharmaciesList" element={<PharmacyList/> } />
+          
           <Route path="/signup" element={<Signup />} />
           <Route path="/manage" element={<AddPharmacy/> } />
         </Routes>
