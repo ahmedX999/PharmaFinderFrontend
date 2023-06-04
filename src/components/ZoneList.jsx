@@ -80,10 +80,16 @@ const ZoneList = () => {
 
   const handleEditZone = async () => {
     try {
-      const response = await axios.put(`https://lacking-mask-production.up.railway.app/api/zones/${selectedZone.id}`, {
-        name: selectedZone.name,
-        cityId: selectedZone.cityId,
-      });
+      const response = await axios.put(
+        `https://lacking-mask-production.up.railway.app/api/zones/${selectedZone.id}`,
+        null,
+        {
+          params: {
+            name: selectedZone.name,
+            cityId: selectedZone.cityId,
+          },
+        }
+      );
       const updatedZone = response.data;
       const updatedZones = zones.map((zone) => (zone.id === updatedZone.id ? updatedZone : zone));
       setZones(updatedZones);
@@ -92,7 +98,8 @@ const ZoneList = () => {
       console.error(error);
     }
   };
-
+  
+  
   const handleDeleteZone = async (zone) => {
     try {
       await axios.delete(`https://lacking-mask-production.up.railway.app/api/zones/deleteZone/id=${zone.id}`);
@@ -186,44 +193,51 @@ const ZoneList = () => {
 
         {/* Edit Zone Modal */}
         <Modal show={showEditModal} onHide={handleEditModalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modify zone</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <div className="form-group">
-                <label htmlFor="editZoneName">Zone name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="editZoneName"
-                  value={selectedZone ? selectedZone.name : ''}
-                  onChange={(e) => setSelectedZone({ ...selectedZone, name: e.target.value })}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="editZoneCityId">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="editZoneCityId"
-                  value={selectedZone && selectedZone.city ? selectedZone.city.name : ''}
-                  onChange={(e) =>
-                    setSelectedZone({ ...selectedZone, city: { id: selectedZone.city.id, name: e.target.value } })
-                  }
-                />
-              </div>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleEditModalClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleEditZone}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Modal>
+  <Modal.Header closeButton>
+    <Modal.Title>Modify zone</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <form>
+      <div className="form-group">
+        <label htmlFor="editZoneName">Zone name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="editZoneName"
+          value={selectedZone ? selectedZone.name : ''}
+          onChange={(e) => setSelectedZone({ ...selectedZone, name: e.target.value })}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="editZoneCityId">City</label>
+        <select
+          className="form-control"
+          id="editZoneCityId"
+          value={selectedZone && selectedZone.cityId ? selectedZone.cityId : ''}
+          onChange={(e) => setSelectedZone({ ...selectedZone, cityId: e.target.value })}
+        >
+          <option value="">Select city</option>
+          {cities.map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.name}
+            </option>
+
+          ))}
+        </select>
+        
+      </div>
+    </form>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleEditModalClose}>
+      Close
+    </Button>
+    <Button variant="primary" onClick={handleEditZone}>
+      Save
+    </Button>
+  </Modal.Footer>
+</Modal>
+
       </div>
 
       <div style={{ width: '100%' }}>{/* Additional content */}</div>
