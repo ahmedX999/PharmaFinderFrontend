@@ -2,26 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button, Table } from 'react-bootstrap';
 
-
-
 const ZoneList = () => {
   const [zones, setZones] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [newZoneName, setNewZoneName] = useState('');
-  const [newCityName, setNewCityName] = useState('');
+  const [newCityId, setNewCityId] = useState('');
   const [selectedZone, setSelectedZone] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [villes, setVilles] = useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
-    fetchVilles();
+    fetchCities();
     fetchZones();
   }, []);
 
-  const fetchVilles = async () => {
+  const fetchCities = async () => {
     try {
       const response = await axios.get('https://lacking-mask-production.up.railway.app/api/cities');
-      setVilles(response.data);
+      setCities(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -43,22 +41,32 @@ const ZoneList = () => {
   const handleAddModalClose = () => {
     setShowAddModal(false);
     setNewZoneName('');
-    setNewCityName('');
+    setNewCityId('');
   };
 
   const handleAddZone = async () => {
     try {
-      const response = await axios.post('https://lacking-mask-production.up.railway.app/api/zones/save', {
-        name: newZoneName,
-        cityId: newCityName,
+      const response = await axios.post('https://lacking-mask-production.up.railway.app/api/zones/save', null, {
+        params: {
+          name: newZoneName,
+          cityId: newCityId,
+        },
       });
       const newZone = response.data;
       setZones([...zones, newZone]);
       handleAddModalClose();
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 400) {
+        console.error('Bad request: ', error.response.data);
+        // Display an error message to the user
+      } else {
+        console.error('Error:', error.message);
+        // Handle other errors
+      }
     }
   };
+  
+  
 
   const handleEditModalShow = (zone) => {
     setSelectedZone(zone);
@@ -74,7 +82,7 @@ const ZoneList = () => {
     try {
       const response = await axios.put(`https://lacking-mask-production.up.railway.app/api/zones/${selectedZone.id}`, {
         name: selectedZone.name,
-        city: { id: selectedZone.city.id, name: selectedZone.city.name },
+        cityId: selectedZone.cityId,
       });
       const updatedZone = response.data;
       const updatedZones = zones.map((zone) => (zone.id === updatedZone.id ? updatedZone : zone));
@@ -137,38 +145,41 @@ const ZoneList = () => {
             <Modal.Title>Add zone</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
-              <div className="form-group">
-                <label htmlFor="zoneName">zone name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="zoneName"
-                  value={newZoneName}
-                  onChange={(e) => setNewZoneName(e.target.value)}
-                />
-                <label htmlFor="cityName">City name</label>
-                <select
-                  className="form-control"
-                  value={newCityName}
-                  onChange={(e) => setNewCityName(e.target.value)}
-                >
-                  <option value="">Select city</option>
-                  {villes.map((ville) => (
-                    <option key={ville.id} value={ville.id}>
-                      {ville.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </form>
+          <form>
+  <div className="form-group">
+    <label htmlFor="zoneName">Zone name</label>
+    <input
+      type="text"
+      className="form-control"
+      id="zoneName"
+      value={newZoneName}
+      onChange={(e) => setNewZoneName(e.target.value)}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="cityId">City</label>
+    <select
+      className="form-control"
+      value={newCityId}
+      onChange={(e) => setNewCityId(e.target.value)}
+    >
+      <option value="">Select city</option>
+      {cities.map((city) => (
+        <option key={city.id} value={city.id}>
+          {city.name}
+        </option>
+      ))}
+    </select>
+  </div>
+</form>
+
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleAddModalClose}>
-              Fermer
+              Close
             </Button>
             <Button variant="primary" onClick={handleAddZone}>
-              Ajouter
+              Add
             </Button>
           </Modal.Footer>
         </Modal>
@@ -191,7 +202,7 @@ const ZoneList = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="editZoneCityId">Ville</label>
+                <label htmlFor="editZoneCityId">City</label>
                 <input
                   type="text"
                   className="form-control"
@@ -213,13 +224,9 @@ const ZoneList = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-
-        
       </div>
 
-      <div style={{ width: '100%' }}>
-       
-      </div>
+      <div style={{ width: '100%' }}>{/* Additional content */}</div>
     </div>
   );
 };
