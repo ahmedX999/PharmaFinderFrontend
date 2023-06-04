@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button, Table } from 'react-bootstrap';
-import FooterComponent from './FooterComponent';
+
 
 
 const ZoneList = () => {
@@ -20,7 +20,7 @@ const ZoneList = () => {
 
   const fetchVilles = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/cities');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/cities');
       setVilles(response.data);
     } catch (error) {
       console.log(error);
@@ -29,7 +29,7 @@ const ZoneList = () => {
 
   const fetchZones = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/zones/all');
+      const response = await axios.get('https://lacking-mask-production.up.railway.app/api/zones/all');
       setZones(response.data);
     } catch (error) {
       console.error(error);
@@ -48,7 +48,7 @@ const ZoneList = () => {
 
   const handleAddZone = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/zones/save', {
+      const response = await axios.post('https://lacking-mask-production.up.railway.app/api/zones/save', {
         name: newZoneName,
         cityId: newCityName,
       });
@@ -72,7 +72,7 @@ const ZoneList = () => {
 
   const handleEditZone = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/api/zones/${selectedZone.id}`, {
+      const response = await axios.put(`https://lacking-mask-production.up.railway.app/api/zones/${selectedZone.id}`, {
         name: selectedZone.name,
         city: { id: selectedZone.city.id, name: selectedZone.city.name },
       });
@@ -87,7 +87,7 @@ const ZoneList = () => {
 
   const handleDeleteZone = async (zone) => {
     try {
-      await axios.delete(`http://localhost:8080/api/zones/deleteZone/id=${zone.id}`);
+      await axios.delete(`https://lacking-mask-production.up.railway.app/api/zones/deleteZone/id=${zone.id}`);
       const updatedZones = zones.filter((z) => z.id !== zone.id);
       setZones(updatedZones);
     } catch (error) {

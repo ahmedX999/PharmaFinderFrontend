@@ -10,7 +10,7 @@ const ZoneForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/zones', zone)
+    axios.post('https://lacking-mask-production.up.railway.app/api/zones', zone)
       .then((response) => {
         // Handle successful response
         console.log(response.data);
